@@ -1,0 +1,37 @@
+// To get started writing Dart syntax. We'll have to write the main function of it. Otherwise our code won't compile anywhere.
+
+// Our main function, Think of it as the grand entrace for code-manipulation while also the ones providing us the ability to debug our code.. It's like Java's main class.
+
+// void means that THIS function cannot RETURN any value (If invoked with the return statement).
+
+// DART programming languages is statically typed. So we'll have to declare that certain variable with its datatype.
+
+void main() {
+  call(
+      "Yeah"); // Code will execute as Hello, Yeah! (It'll display 'Yeah' since we pass it as an arguments to call() function)
+
+  int sum = add(4,
+      3); // Within the add() function, we pass in int value (Which is already set in the add() function itself) to return x + y (x,y is a parameters. Think of it like a placeholder for passing an arguments.)
+
+  // Then we encapsulate the result of our add() function [The result is 7] into sum variable, and finally we invoke it using text interpolation. (Notice how we uses '' rather than ` ?)
+  print("Here's your result $sum");
+
+  String name = greet("Darell");
+
+  print("Hello $name");
+}
+
+call(String name) {
+  print("Hello, $name!");
+}
+
+// Here add function holds two parameters with both integer datatype. It's reserved ONLY for passed-in integer arguments.
+int add(int x, int y) {
+  return x * y;
+}
+
+String greet(String username) {
+  return username;
+}
+
+// To view this output, heads down into your Terminal separated from the VScode provided.
