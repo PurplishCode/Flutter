@@ -1,0 +1,82 @@
+// main() function acts as the template for our Dart to run. Any codes within the curly brackets { code } will be executed.
+// Although we still can invoke functions OUTSIDE of main.
+
+void main() {
+  // print(
+  //     "   /|"); // The programs print-out each line of print() statement. Multi-instruction.
+  // print(
+  //     "  / |"); // But the important stuff is, this code is executed in-order. From Top-to-Bottom.
+  // print(" /__|");
+
+  // Alright. Let's talk about text-interpolation.
+
+  String name =
+      "Darell"; // Variable "name" is initialized as String, or what we'll like to refer it as Plain text. It holds the value "Darell".
+
+  print(
+      "His name is $name"); // In this provided example. We printed out "His name is" with an addition of our name variable (which contains "Darell"), this is what Text interpolation is.
+  // The combining "String" with variables.. So we don't necessarily have to insert our name ("Darell") into the print statement, but rather invoking that variable. Similarly like Javascript's backticks (Ex: console.log(`His name is ${name}`));
+
+  int age =
+      16; // Of course. There are various of datatypes out in the wild. int acts as Number (Integer), so whatever value is inside of INT datatype, it'll be considered as Number.
+
+  print("He's $age years old.");
+
+  double heigth =
+      21.2; // Using double gained the ability to use decimal portions.
+  bool isStudent = true; // Boolean datatype holds either truthty or falsey.
+
+  print(
+      "$name is $age years old, he's $heigth tall and is a student: $isStudent");
+  int futureYears = 10;
+  int newAge = age +
+      futureYears; // Calculating the newAge of $name (Darell) with futureYears adds age.
+
+  print("$name will be $newAge in the next $futureYears years ahead!");
+
+  List<String> hobbies = [
+    'Coding',
+    'Writing',
+    'Reading'
+  ]; // Creating a list with datatype of String. The name's list will be hobbies, which initialized an arrays. (Multiple values into one bits)
+  print(
+      "$name's hobby:  ${hobbies.join(', ')}"); // .join() Gives the representation of String from arrays / object.
+// We also uses ${} so our .join methods can be invoked instead of representing it as String.
+
+// Here we have reusable function!
+// Inside of callPerson parameters. It'll hold 3 params with each unique datatype.. So the next-time this function is invoked. They'll have to fill in the parameters (Giving an arguments) based on its datatype.
+  void callPerson(String username, int ages, double heights) {
+    print(
+        "His name is, $username, he's $ages years old. He's also $heights foot tall.");
+  }
+
+  callPerson(name, age,
+      heigth); // Passing in an-already exists variable as arguments into callPerson parameters.
+
+  // Conditioning!
+
+  if (isStudent && age > 18) {
+    print("$name is eligible to vote!");
+  } else if (isStudent && age < 18) {
+    print("$name is eligble to vote under Parental's guidance.");
+  } else {
+    print("$name is not suited to vote.");
+  }
+
+  // Looping
+
+// Think of this like for(var hobby of hobbies) in javascript. Basically iterates the object / Arrays into representation of String.
+  for (var hobby in hobbies) {
+    print("$name has tons of hobbies! Listed here: $hobby");
+  }
+
+  // Returning statement!
+  calc(int height, int width) {
+    return heigth * width;
+  }
+
+  double result = calc(3,
+      4); // Passing in arguments of 3 (params 1 for height) and 4 (params 2 for width) to calc() function.
+
+  print("$result is the amount of Width x Height");
+}
