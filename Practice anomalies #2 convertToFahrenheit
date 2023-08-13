@@ -1,0 +1,17 @@
+import 'dart:io';
+
+Temperature Converter.
+void main() {
+  print("Welcome to Temperature Converter!");
+
+  print("Please input your temperature to convert it into Fahrenheit.");
+  double celcius = double.parse(stdin.readLineSync()!);
+
+  double result = convertToFahrenheit(celcius);
+
+  print("The result is.. $result");
+}
+
+convertToFahrenheit(value) {
+  return value = (value - 32) * 5 / 9;
+}
