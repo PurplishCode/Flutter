@@ -1,0 +1,30 @@
+import 'dart:io';
+import 'dart:math';
+
+void main() {
+  print("Welcome to guessing game! Let's play.");
+  print("I'm thinking of 1-10. Whaddya say?");
+
+  Random random = Random();
+
+  int randomNumber = random.nextInt(10) + 1;
+  int attempts = 0;
+  bool isGuessed = false;
+
+  while (!isGuessed) {
+    print("Guess the number: ");
+    String guess = stdin.readLineSync()!;
+    int guessedNumber = int.tryParse(guess) ?? 0;
+
+    if (guessedNumber == randomNumber) {
+      print("Congrats.");
+      isGuessed = true;
+    } else if (guessedNumber < randomNumber) {
+      print("Too low, try again.");
+    } else {
+      print("Too high, try again.");
+    }
+    attempts++;
+  }
+  print("You guessed the number with $attempts amount of attempts.");
+}
