@@ -1,0 +1,81 @@
+import 'dart:convert';
+
+import 'dart:io';
+import 'package:http/http.dart' as http;
+
+Future<void> fetchBook() async {
+  final response =
+      await http.get(Uri.parse("http://localhost:3000/book-api/listBook"));
+  if (response.statusCode == 200) {
+    final data = {response.body};
+    print(" Here's your fetched book.. $data");
+  }
+}
+
+Future<void> inputBook() async {
+  print("Let's input some Book Data!");
+
+  print("The title of Book: ");
+  final title = stdin.readLineSync()!;
+
+  print("The description of book:");
+  final description = stdin.readLineSync()!;
+
+  final data = {'title': title, 'description': description};
+
+  final res = await http.post(
+      Uri.parse('http://localhost:3000/book-api/addBook'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(data));
+
+  if (res.statusCode == 200) {
+    print("Succesfully added the book!");
+    fetchBook();
+  }
+}
+
+Future<void> updatingBook() async {
+  print("Please input the BOOK_ID you want to change.");
+  final bookID = stdin.readLineSync()!;
+
+  print("Okay! $bookID is the BOOK_ID. Let's alter it. Title:");
+  final title = stdin.readLineSync()!;
+
+  print("And finally description:");
+  final description = stdin.readLineSync()!;
+
+  final dataAll = {'title': title, 'description': description};
+
+  final fetch = await http.put(
+      Uri.parse('http://localhost:3000/book-api/updateBook/$bookID'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(dataAll));
+
+  if (fetch.statusCode == 200) {
+    print("Succesfully Altered the Data!");
+  } else {
+    print("Error.");
+  }
+}
+
+Future<void> deleteBook() async {
+  print("Please input the BOOK_ID you'll like to delete.");
+  final bookID = stdin.readLineSync()!;
+
+  final deleted = await http
+      .delete(Uri.parse('http://localhost:3000/book-api/deleteBook/$bookID'));
+
+  if (deleted.statusCode == 200) {
+    print("Delete is succesful!");
+    fetchBook();
+  } else {
+    print("Delete Failed.");
+  }
+}
+
+void main() async {
+  fetchBook();
+  inputBook();
+  updatingBook();
+  deleteBook();
+}
