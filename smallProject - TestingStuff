@@ -1,0 +1,77 @@
+import 'package:flutter/material.dart'; // Importing the specific dependencies from pubspec.yaml!
+import 'package:provider/provider.dart';
+import 'package:english_words/english_words.dart';
+
+// @ovveride <-> This annotation is recognized by the Dart analyzer, and it allows the analyzer to provide hints or warnings for some potential problems of an otherwise valid program.
+// Debug or reloading thsi application using 'r' || 'R' keyword on the Terminal.
+void main() {
+  // main() The code-block that'll be executed by Dart.
+  runApp(
+      myApp()); // runApp() basically invoke that given widget into  our application screen.
+}
+
+class myApp extends StatelessWidget {
+  // We extend (include) our myApp class with StatelessWidget, a widget that's immutable.. Which means it WONT change. (Or in other words, Stateless widget can't change their state during the app runtime. You can't redraw it back!)
+  const myApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // Building our widget.. It's like a code-block for Flutter. Since we're using Stateless Widget, we'll have to return something.. (For example: ChangeNotifierProvider from our provider module.)
+    return ChangeNotifierProvider(
+      create: (context) =>
+          myAppState(), // Creating a widget named myAppState. Then it's used later on.
+      child: MaterialApp(
+        title: "Plutterrs",
+        theme: ThemeData(
+            scaffoldBackgroundColor: Color.fromARGB(255, 44, 6, 255),
+            useMaterial3: true,
+            colorScheme: ColorScheme.fromSeed(
+                seedColor: Color.fromARGB(43, 7, 255, 181))),
+        home:
+            MyHomePage(), // home: MyHomePag(), it's basically telling Flutter to use this Widget as the ones for our Application interface.
+      ),
+    );
+  }
+}
+
+class myAppState extends ChangeNotifier {
+  late WordPair
+      current; // late keyword is used to indicate that a variable will be initialized at some point before it is first accessed, and it won't be null when accessed later.
+  myAppState() {
+    current = WordPair.random();
+  }
+
+  changeNotifier() {
+    current = WordPair.random();
+    notifyListeners();
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    late var appState = context.watch<myAppState>(); //
+    return Scaffold(
+      body: Center(
+        heightFactor: 15,
+        child: Container(
+            color: Color.fromARGB(255, 240, 255, 24), // The container
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                    onPressed: () {
+                      appState.changeNotifier();
+                    },
+                    child: Text("Click me to change current state:")),
+                Text(
+                  appState.current.asCamelCase,
+                  style: TextStyle(fontSize: 20, color: Colors.red),
+                ),
+              ],
+            )),
+      ),
+    );
+  }
+}
+// To run this on android (AVD) use flutter run --pub --hot
