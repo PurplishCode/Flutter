@@ -1,0 +1,20 @@
+Flutter is made up three main trees.
+- Widget
+- Render
+- Element
+
+- Widget -
+Widgets are immutable. 
+They represent the configuration for RenderObjects. 
+Flutter is optimized such that it can easily create and destroy widgets without any significant performance implications. 
+
+- Render -
+RenderObjects, on the other hand, are mutable objects that do the heavy lifting of turning the configuration supplied from widgets into pixels users can see and interact with on the screen.
+Unlike widgets that are cheap and can safely be created and destroyed without any significant performance implications, the same cannot be said for RenderObjects.
+For this reason, whenever the configuration of a widget changes, the framework looks at the change and updates the associated RenderObject instead of creating a new one each time.
+
+- Element - 
+In the middle of Widgets and RenderObjects sits Elements. 
+These act as the glue between the immutable widget layer and the mutable render layer.
+As the configuration of a widget changes (for example, a user calls setState which triggers a rebuild), the element looks at the incoming changes and tells the associated render object, 
+"Hey! The user requested a change, it is time for you to update." 

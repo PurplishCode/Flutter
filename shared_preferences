@@ -1,0 +1,80 @@
+
+
+`SharedPreferences' adalah suatu Flutter package yang di-pergunakan untuk menyimpan suatu data (maupun itu kecil, ataupun besar) secara beruntun selama aplikasi berjalan didalam file suatu device. Dengan kata lain, data tersebut
+dapat dipanggil ulang seketika aplikasi melakukan restart (mode debugging), karena data tersebut tidak pernah hilang melainkan sudah disimpan kedalam SharedPreference, (terkecuali cache aplikasi dihapus atau aplikasi di-uninstall),
+SharedPreferences berguna sebagai tanda. Maksudnya, seperti tanda bahwa SplashScreen sudah dilihat maka lewati, jika belum, perlihatkan SplashScreen tersebut hingga tanda [SplashScreen] yang sudah dilihat diset -> true.
+Atau contoh lain dengan menyimpan suatu tema- (Seperti local-language, dark/light theme, etc..)
+
+Syntax yang dipergunakan untuk membuat instansi dalam SharedPreferences sebagai berikut:
+SharedPreferences prefs = [await] SharedPreferences.getInstance();
+
+Variable "prefs" akan menyimpan instansi SharedPreferences dan dapat dipergunakan untuk membangun suatu data beruntun ataupun memanggil data tersebut.
+SharedPreferences juga mendukung beragam datatype [Primitive ataupun non-primitive ], seperti String, int, bool, double, and so on.. Berikut cara membuat suatu data dalam instansi SharedPreferences.
+
+-- SYNTAX EXAMPLE --
+
+prefs.setString('stringData', "iniAdalahValueDaristringData"); // String
+
+prefs.setInt('intData', 5); // int
+
+prefs.setBool("boolData", true); // boolean
+
+prefs.setDouble("doubleData", 1.0); // double
+
+-- END OF EXAMPLE --
+
+Dengan cara berikut, maka setiap data akan tersimpan ke-dalam instansi SharedPreferences yang sudah kita definisikan. Data tersebut tersimpan dalam method (key-value pair), yaitu dua value, satu didefinisikan sebagai kunci, dan yang kedua
+sebagai isian dari key tersebut. (key, value) lebih ringkas nya.
+
+Nah dengan begitu, kita bisa saja memanggil data tersebut yang sudah kita buat. Yang kita perlu lakukan iyalah mengambil kembali KEY yang sudah kita inisialisasikan, lalu value dalam key tersebut akan terpanggil.
+Berikut iyalah contoh:
+
+-- SYNTAX EXAMPLE --
+
+String dataString = prefs.getString('stringData'); // key: "stringData", value: "iniAdalahValueDaristringData"
+// print(dataString); [Akan menampilkan output: "iniAdalahValueDaristringData"]
+
+int dataInt = prefs.getInt('intData'); // key: "intData", value: 5
+// print(dataInt); [Akan menampilkan output: 5]
+
+
+int dataBool = prefs.getBool('boolData'); // key: "boolData", value: true
+// print(dataBool); [Akan menampilkan output: true]
+
+
+int dataDouble = prefs.getDouble('doubleData'); // key: "doubleData", value: 1.0
+// print(dataDouble); [Akan menampilkan output: 1.0]
+
+-- END OF EXAMPLE --
+
+Dengan begitu, setiap instansi data akan menampil hasil yang berbeda sesuai dengan masing-masing key-value pair yang telah dibuat. Keren, bukan?
+Namun, jika data / ataupun key yang bersangkutan tidak ada, maka akan mengembalikan null.
+
+-- SYNTAX EXAMPLE --
+
+SharedPreferences prefs = [await] SharedPreferences.getInstance();
+
+prefs.setString('dataString', "halo!");
+prefs.getString('_dataString'); // Ini mengembalikan null.
+
+-- END OF EXAMPLE --
+
+Selain itu, untuk melakukan pengecekan suatu keberadaan data instansi yakni sebelum kita menulis ataupun membaca data tersebut, dapat mudah dilakukan dengan menggunakan syntax prefs.containsKey("dataKey")
+
+-- SYNTAX EXAMPLE -- 
+
+SharedPreferences prefs = [await] SharedPreferences.getInstance();
+prefs.setString('stringData', "HaloStringOfData")
+
+if(prefs.containsKey('stringData')) {
+String dataString = prefs.getString('stringData');
+print(dataString); // HaloStringOfData
+} else {
+print("Data is not found.");
+}
+
+-- END OF EXAMPLE --
+
+[ PENUTUPAN ]
+
+Sekian dari penjelesan mengenai SharedPreferences package. Tentu saja tutorial ini hanya menunjukkan beberapa contoh sederhana mengenai SharedPreferences. Secara luas, package ini memiliki banyak cara unik untuk melakukan hal yang beragam. Maupun itu menyimpan data-kecil dari login credentials, tema, dan banyak lagi.
